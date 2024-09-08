@@ -128,7 +128,7 @@
 
         // Xに投稿するボタンの動作
         document.getElementById('tweetButton').onclick = function() {
-            const textToTweet = `"${randomQuestion}" #哲学カレンダー philonook.com/philosophy_calendar/`;
+            const textToTweet = `"${randomQuestion}" #哲学カレンダー https://philonook.com/philosophy_calendar/`;
             const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textToTweet)}`;
             window.open(tweetUrl, '_blank');
         };
