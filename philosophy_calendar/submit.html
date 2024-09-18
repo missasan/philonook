@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>問いを投稿する</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div class="submit-container">
+        <h1>問いを投稿する</h1>
+        <form id="submitForm">
+            <textarea id="newQuestion" placeholder="ここに哲学的な問いを入力してください" rows="5" cols="50"></textarea>
+            <br>
+            <button type="button" onclick="submitQuestion()">投稿</button>
+        </form>
+    </div>
+
+    <script>
+        // 問いを投稿する関数
+        async function submitQuestion() {
+            const question = document.getElementById('newQuestion').value;
+
+            if (question) {
+                // Cloudflare Workers APIエンドポイントにPOSTリクエストを送信
+                const response = await fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ question }),
+                });
+
+                if (response.ok) {
+                    alert('問いが投稿されました！');
+                    window.location.href = '/';
+                } else {
+                    alert('投稿に失敗しました。もう一度お試しください。');
+                }
+            } else {
+                alert('問いを入力してください。');
+            }
+        }
+    </script>
+
+</body>
+</html>
